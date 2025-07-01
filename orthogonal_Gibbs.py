@@ -13,7 +13,7 @@ def orthogonal_gibbs_sampling(M, y, num_samples, omegay_sampling=True, omegax_sa
     num_samples      Number of different x to be sampled
     omegay_sampling  If True, ten omega_y is sampled accorgingly. If False, omega_y is fixedly chosen by another arg.
     omegax_sampling  If True, ten omega_x is sampled accorgingly. If False, omega_x=0.
-    omegay           If omegay_sampling is True, then this fixed value is used. If omegay_sampling is False, then
+    omegay           If omegay_sampling is False, then this fixed value is used. If omegay_sampling is True, then
                      it does not have relevance.
     warm_up          Number of first x samples that are omitted due to parameters updates warm up.
                      Therefore, total number of samples is num_samples-warm_up

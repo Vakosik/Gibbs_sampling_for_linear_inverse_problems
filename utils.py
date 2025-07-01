@@ -2,6 +2,7 @@ import numpy as np
 from scipy.stats import truncnorm
 import math
 
+
 def post_dist_mean(yr, m, omega_y, sigma2):
     return omega_y * np.dot(yr, m) * sigma2
 
