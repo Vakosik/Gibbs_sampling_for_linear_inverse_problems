@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.stats import truncnorm
-import math
 
 
 def post_dist_mean(yr, m, omega_y, sigma2):
@@ -29,7 +28,16 @@ def bounds_for_alpha(betas, Vj):
     return upper_bound, lower_bound
 
 
-def truncnorm_scipy(mean, scale, betas, Vj):
+def truncnorm_ordinary(mean, scale):
+    a, b = (0-mean)/scale, np.inf
+    s = truncnorm.rvs(a, b, loc=mean, scale=scale, size=1)[0]
+    if s < 0:  # for numerical reasons, it might happen that s is not well sampled by truncnorm
+        s = 0
+
+    return s
+
+
+def truncnorm_orthogonal(mean, scale, betas, Vj):
     upper_bound, lower_bound = bounds_for_alpha(betas, Vj)
     a, b = (lower_bound - mean) / scale, (upper_bound - mean) / scale
 
