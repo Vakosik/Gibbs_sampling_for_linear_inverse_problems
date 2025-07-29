@@ -19,7 +19,7 @@ def orthogonal_gibbs_sampling(M, y, num_samples, omegay_sampling=True, omegax_sa
                      Therefore, total number of samples is num_samples-warm_up
 
     output arguments:
-    x            Matrix of size (num_samples, n), i.e. each row contains a sampeled solution of Mx=y
+    x            Matrix of size (num_samples, n), i.e. each row contains a sample of x
     """
     from scipy.optimize import nnls
 
@@ -98,7 +98,7 @@ def orthogonal_gibbs_sampling(M, y, num_samples, omegay_sampling=True, omegax_sa
                 continue
 
             sample_mean = post_dist_mean(np.copy(y), A[:, j], omegay, sample_var)
-            alphas[i, j] = truncnorm_scipy(sample_mean, np.sqrt(sample_var), betas, V[:, j])
+            alphas[i, j] = truncnorm_orthogonal(sample_mean, np.sqrt(sample_var), betas, V[:, j])
 
         x[i, :] = np.matmul(V, alphas[i, :])
 
